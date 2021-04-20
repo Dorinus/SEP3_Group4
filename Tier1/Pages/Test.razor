@@ -1,0 +1,55 @@
+@page "/Test"
+@using System.Text.Json
+
+
+<h3>Test</h3>
+
+@if (user == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else 
+{
+    
+    <button class="btn btn-primary" @onclick="GetUserAsync">Get User from database</button>
+    <p>
+        <br>Username: @user.Username
+        <br>Password: @user.Password
+        <br>ID: @user.id
+    </p>
+    
+    
+}
+
+
+@code {
+
+    private User user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = new User();
+    }
+    
+   
+
+    private async Task GetUserAsync()
+    {
+        user = await FetchUserAsync();
+    }
+    
+    public async static Task<User> FetchUserAsync()
+    {
+        HttpClient client = new HttpClient();
+        HttpResponseMessage responseMessage = await client.GetAsync("http://localhost:8080/user");
+        if (!responseMessage.IsSuccessStatusCode)
+            throw new Exception($"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+        string result = await responseMessage.Content.ReadAsStringAsync();
+        User user = JsonSerializer.Deserialize<User>(result,
+            new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+        return user;
+    }
+
+}
