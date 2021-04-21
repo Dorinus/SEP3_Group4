@@ -8,7 +8,7 @@ using Tier3.DataAccess;
 namespace Tier3.Migrations
 {
     [DbContext(typeof(ProBidDBContext))]
-    [Migration("20210420033029_InitialCreate")]
+    [Migration("20210420214129_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
