@@ -82,8 +82,15 @@ using Tier1.Shared;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/counter")]
-    public partial class Counter : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 2 "D:\SEP3Proj\SEP3_Group4\Tier1\Pages\Register.razor"
+using Tier1.Data;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Register")]
+    public partial class Register : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,19 +98,38 @@ using Tier1.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 9 "D:\SEP3Proj\SEP3_Group4\Tier1\Pages\Counter.razor"
+#line 27 "D:\SEP3Proj\SEP3_Group4\Tier1\Pages\Register.razor"
        
-    private int currentCount = 0;
+    private User NewUserToRegister = new User();
+    private PersonalInfo NewPersonalInfo= new PersonalInfo();
 
-    private void IncrementCount()
+    private async Task AddNewUser()
     {
-        currentCount++;
+        NewUserToRegister.PersonalInfo = NewPersonalInfo;
+        NewUserToRegister.Type = "user";
+
+    // Requesting tier 2 to register a user and getting the response
+        bool response=  await UserManager.RegisterNewUser(NewUserToRegister);
+
+        if (response)
+        {
+            Console.WriteLine("it worked!!!!");
+            NavigationManager.NavigateTo("/Index");
+        }
+        else
+        {
+            Console.WriteLine("smth went wrong");
+            // TODO write r message label
+        }
+        
     }
 
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserManager UserManager { get; set; }
     }
 }
 #pragma warning restore 1591

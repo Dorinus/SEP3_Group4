@@ -1,0 +1,52 @@
+@page "/Register"
+@using Tier1.Data
+@inject IUserManager UserManager
+@inject NavigationManager NavigationManager
+
+
+
+<h3> Register new user </h3>
+<EditForm Model="@NewUserToRegister" OnValidSubmit="@AddNewUser">
+    <DataAnnotationsValidator/> <ValidationSummary/>
+    <div class="form-group"> Username:<br/> <InputTextArea @bind-Value="NewUserToRegister.UserName"/> </div>
+    <div class="form-group"> Password:<br/> <InputTextArea rows="4" @bind-Value="NewUserToRegister.Password"/> </div>
+    <div class="form-group"> Repeat Password:<br/> <InputTextArea rows="4" @bind-Value="NewUserToRegister.Password"/> </div>
+    <div class="form-group"> First Name:<br/> <InputTextArea rows="4" @bind-Value="NewPersonalInfo.FirstName"/> </div>
+    <div class="form-group"> Last Name:<br/> <InputTextArea rows="4" @bind-Value="NewPersonalInfo.LastName"/> </div>
+    <div class="form-group"> Date of Birth:<br/> <InputTextArea rows="4" @bind-Value="NewPersonalInfo.Dob"/> </div>
+    <div class="form-group"> Mail:<br/> <InputTextArea rows="4" @bind-Value="NewPersonalInfo.Email"/> </div>
+    <div class="form-group"> Address:<br/> <InputTextArea rows="4" @bind-Value="NewPersonalInfo.Address"/> </div>
+    <div class="form-group"> Postal Index:<br/> <InputTextArea rows="4" @bind-Value="NewPersonalInfo.PostalIndex"/> </div>
+    <div class="form-group"> Card:<br/> <InputTextArea rows="4" @bind-Value="NewPersonalInfo.Card"/> </div>
+    <div class="form-group"> Card Date:<br/> <InputTextArea rows="4" @bind-Value="NewPersonalInfo.CardDate"/> </div>
+    <p class="actions">
+        <button class="btn btn-outline-dark" type="submit">Create new accaunt</button>
+    </p>
+</EditForm>
+
+@code {
+    private User NewUserToRegister = new User();
+    private PersonalInfo NewPersonalInfo= new PersonalInfo();
+
+    private async Task AddNewUser()
+    {
+        NewUserToRegister.PersonalInfo = NewPersonalInfo;
+        NewUserToRegister.Type = "user";
+
+    // Requesting tier 2 to register a user and getting the response
+        bool response=  await UserManager.RegisterNewUser(NewUserToRegister);
+
+        if (response)
+        {
+            Console.WriteLine("it worked!!!!");
+            NavigationManager.NavigateTo("/Index");
+        }
+        else
+        {
+            Console.WriteLine("smth went wrong");
+            // TODO write r message label
+        }
+        
+    }
+
+}
