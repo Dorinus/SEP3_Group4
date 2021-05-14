@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Tier1;
 using Tier3.DataAccess;
-using Tier3.Models;
 
 namespace Tier3.Services
 {

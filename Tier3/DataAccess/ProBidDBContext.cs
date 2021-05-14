@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Tier3.Models;
+using Tier1;
 
 namespace Tier3.DataAccess
 {
@@ -14,7 +14,7 @@ namespace Tier3.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // name/ location of database
-            optionsBuilder.UseSqlite(@"Data Source = ProBid.db");
+            optionsBuilder.UseSqlite(@"Data Source = C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\Tier3");
         }
     }
 }

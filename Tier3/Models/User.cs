@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Tier1
 {
@@ -12,8 +13,6 @@ namespace Tier1
         public String Password { get; set; }
         
         public String Type { get; set; }
-        
-
         public PersonalInfo PersonalInfo { get; set; }
 
         public User()

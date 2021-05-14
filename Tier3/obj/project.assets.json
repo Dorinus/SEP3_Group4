@@ -1256,19 +1256,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\tolde\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SEP3Proj\\SEP3_Group4\\Tier3\\Tier3.csproj",
+      "projectUniqueName": "C:\\Users\\tolde\\RiderProjects\\DNPAssignments\\SEP3_Group4\\Tier3\\Tier3.csproj",
       "projectName": "Tier3",
-      "projectPath": "D:\\SEP3Proj\\SEP3_Group4\\Tier3\\Tier3.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\SEP3Proj\\SEP3_Group4\\Tier3\\obj\\",
+      "projectPath": "C:\\Users\\tolde\\RiderProjects\\DNPAssignments\\SEP3_Group4\\Tier3\\Tier3.csproj",
+      "packagesPath": "C:\\Users\\tolde\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tolde\\RiderProjects\\DNPAssignments\\SEP3_Group4\\Tier3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\tolde\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -1329,7 +1329,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

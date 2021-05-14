@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Tier3.Models;
+using Tier1;
 using Tier3.Services;
 
 namespace Tier3.Controllers

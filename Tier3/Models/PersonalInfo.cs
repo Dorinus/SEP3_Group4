@@ -5,6 +5,7 @@ namespace Tier1
 {
     public class PersonalInfo
     {
+        [Key]
         [Required, MaxLength(128)]
         public String FirstName { get; set; }
         [Required, MaxLength(128)]

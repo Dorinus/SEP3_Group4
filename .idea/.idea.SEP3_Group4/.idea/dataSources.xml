@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="ProBid.db" uuid="8f1c17fe-8b0e-4779-b8ef-85bedb7c3fab">
+    <data-source source="LOCAL" name="SQLite - ProBid.db" uuid="8f1c17fe-8b0e-4779-b8ef-85bedb7c3fab">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:D:\SEP3Proj\SEP3_Group4\Tier3\ProBid.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="SQLite - ProBidDBContextModelSnapshot.cs" uuid="a7dc47dc-6e61-4297-9a9b-fcd75493e364">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/Tier3/Migrations/ProBidDBContextModelSnapshot.cs</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
