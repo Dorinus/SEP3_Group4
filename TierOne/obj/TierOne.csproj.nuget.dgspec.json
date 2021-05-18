@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SEP3Proj\\SEP3_Group4\\Tier3\\Tier3.csproj": {}
+    "D:\\SEP3Proj\\SEP3_Group4\\TierOne\\TierOne.csproj": {}
   },
   "projects": {
-    "D:\\SEP3Proj\\SEP3_Group4\\Tier3\\Tier3.csproj": {
+    "D:\\SEP3Proj\\SEP3_Group4\\TierOne\\TierOne.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SEP3Proj\\SEP3_Group4\\Tier3\\Tier3.csproj",
-        "projectName": "Tier3",
-        "projectPath": "D:\\SEP3Proj\\SEP3_Group4\\Tier3\\Tier3.csproj",
+        "projectUniqueName": "D:\\SEP3Proj\\SEP3_Group4\\TierOne\\TierOne.csproj",
+        "projectName": "TierOne",
+        "projectPath": "D:\\SEP3Proj\\SEP3_Group4\\TierOne\\TierOne.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\SEP3Proj\\SEP3_Group4\\Tier3\\obj\\",
+        "outputPath": "D:\\SEP3Proj\\SEP3_Group4\\TierOne\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,23 +38,25 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.4, )"
             },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[5.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.4, )"
             },
-            "Swashbuckle.AspNetCore": {
+            "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
-              "version": "[5.6.3, )"
+              "version": "[5.0.4, )"
             }
           },
           "imports": [

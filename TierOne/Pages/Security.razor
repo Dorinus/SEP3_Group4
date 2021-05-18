@@ -1,0 +1,36 @@
+@page "/Security"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<AuthorizeView>
+    <h3>
+        Hello @context.User.Identity.Name
+    </h3>
+    <h5>
+        Your security
+        level
+        is
+        @context.User.FindFirst(claim => claim.Type.Equals("UserType")).Value
+    </h5>
+
+</AuthorizeView>
+
+<p>This piece of text is visible for everyone</p>
+
+<AuthorizeView Policy="admin">
+    <p>This piece of text is visible for Administrator</p>
+</AuthorizeView>
+
+<AuthorizeView Policy="manager">
+    <p>This piece of text is visible for Moderator and Administrator</p>
+</AuthorizeView>
+
+
+<AuthorizeView Policy="user">
+    <p>This piece of text is visible for User</p>
+</AuthorizeView>
+
+
+
+
+@code {
+}

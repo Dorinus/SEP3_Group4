@@ -1,0 +1,106 @@
+@page "/AllUsers"
+@using Tier1.Data
+@using Tier1
+@inject IUserManager UserManager
+
+
+<h3>All Users</h3>
+
+@if (users == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else if (!users.Any())
+{
+    <p>
+        <em>No ToDo items exist. Please add some.</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User ID</th> <th>UserName</th> <th>Email</th> <th>FirstName</th>
+            <th>LastName</th> <th>Address</th> <th>PostalIndex</th> <th>Dob</th>
+            <th>Type</th>
+
+            <AuthorizeView Policy="OnlyAdmin">
+                <th>Change Type</th>
+                <th>Delete</th>
+            </AuthorizeView>
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in  users)
+        {
+            <tr>
+                <td>@item.Id</td> <td>@item.UserName</td> <td>@item.Email</td> <td>@item.FirstName</td>
+                <td>@item.LastName</td> <td>@item.Address</td> <td>@item.PostalIndex</td> <td>@item.Dob</td>
+                <td>@item.Type</td>
+
+                <AuthorizeView Policy="OnlyAdmin">
+                    <td>
+                        <button @onclick="@(() => ChangeUser(item.Id))">
+                            <i class="oi oi-person" style="color:blue"/>
+                        </button>
+                    </td>
+                    <td>
+                        <button @onclick="@(() => RemoveUser(item.Id))">
+                            <i class="oi oi-trash" style="color:red"/>
+                        </button>
+                    </td>
+
+                </AuthorizeView>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+
+@code {
+    private IList<User> users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = UserManager.GetUsers(1);
+    }
+
+    private async void RemoveUser(int userId)
+    {
+        bool response = UserManager.RemoveUser(userId);
+
+        if (response)
+        {
+            User user = users.First(t => t.Id == userId);
+            users.Remove(user);
+        }
+        else
+        {
+    //TO DO write an error mesage
+        }
+    }
+
+    private void ChangeUser(int userId)
+    {
+        String response =  UserManager.ChangeUser(userId);
+
+        User user = users.First(t => t.Id == userId);
+        if (user.Type.Equals("user"))
+        {
+            response = "manager";
+        }
+        else
+        {
+            response = "user";
+        }
+            users.First(t => t.Id == userId).Type = response;
+       
+    }
+
+}
