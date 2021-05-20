@@ -1,6 +1,6 @@
 using System.Net.Http;
 
-namespace Tier1.Data
+namespace TierOne.Data
 {
     public abstract class DataManager
     {

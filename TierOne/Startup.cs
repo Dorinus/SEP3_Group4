@@ -14,8 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Tier1;
-using Tier1.Data;
+using TierOne;
 using TierOne.Areas.Identity;
 using TierOne.Data;
 
@@ -46,6 +45,7 @@ namespace TierOne
                 >();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSingleton<IUserManager, UserManager>();
+            services.AddSingleton<IProductManager, ProductManager>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             
             

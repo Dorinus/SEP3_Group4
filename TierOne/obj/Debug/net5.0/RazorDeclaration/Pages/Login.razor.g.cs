@@ -82,13 +82,6 @@ using TierOne.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 3 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Login.razor"
-using Tier1;
-
-#line default
-#line hidden
-#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Login")]
     public partial class Login : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -98,7 +91,7 @@ using Tier1;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 25 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Login.razor"
+#line 24 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Login.razor"
        
     private string username;
     private string password;

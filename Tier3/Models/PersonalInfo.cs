@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Tier1
+namespace TierOne
 {
     public class PersonalInfo
     {

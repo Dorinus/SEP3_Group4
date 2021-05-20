@@ -1,0 +1,41 @@
+@page "/NewProduct"
+@using TierOne.Data
+@using System.IO
+@using System.Diagnostics.Tracing
+@inject IProductManager ProductManager
+
+<h3>New Product</h3>
+
+<EditForm Model="@NewProduct" OnValidSubmit="@CreateNewProduct">
+    <DataAnnotationsValidator/> <ValidationSummary/>
+    <div class="form-group"> Name:<br/> <InputText @bind-Value="NewProduct.Name"/> </div>
+
+    <div class="form-group"> Date:<br/> <InputDate rows="4" @bind-Value="DateTime"/> </div>
+
+    <div class="form-group"> Photo:<br/> <InputFile OnChange="@LoadImage"/> </div>
+    <div class="form-group"> Price:<br/> <InputNumber rows="4" @bind-Value="NewProduct.Price"/> </div>
+
+    <div class="form-group"> Description:<br/> <InputTextArea rows="4" @bind-Value="NewProduct.Description"/> </div>
+
+
+    <p class="actions">
+        <button class="btn btn-outline-dark" type="submit">Create new product</button>
+    </p>
+</EditForm>
+
+@code {
+    private Product NewProduct = new Product();
+    private DateTime DateTime = DateTime.Now;
+    private String Tags;
+    private String Categories;
+
+
+    private async void CreateNewProduct()
+    {
+    }
+
+    private void LoadImage()
+    {
+    }
+
+}

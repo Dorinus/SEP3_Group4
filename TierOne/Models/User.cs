@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Tier1
+namespace TierOne
 {
     public class User
     {
@@ -39,7 +39,8 @@ namespace Tier1
         {
         }
 
-        public User(int id, string userName, string password, string type,  string firstName, string lastName, string dob, string email, string card, string cardDate, string address, string postalIndex)
+        public User(int id, string userName, string password, string type,  string firstName, string lastName, 
+            string dob, string email, string card, string cardDate, string address, string postalIndex)
         {
             Id = id;
             UserName = userName;

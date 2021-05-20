@@ -5,9 +5,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
-using Tier1.Data;
+using TierOne.Data;
 
-namespace Tier1
+namespace TierOne
 {
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {

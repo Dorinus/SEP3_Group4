@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Tier1.Data
+namespace TierOne.Data
 {
     public class UserManager : DataManager, IUserManager
     {
@@ -17,7 +17,7 @@ namespace Tier1.Data
         public UserManager()
         {
             Client = HttpClient;
-            Uri = "http://localhost:8080/user";
+            Uri = "http://localhost:8090/user";
         }
         
         
@@ -86,9 +86,16 @@ namespace Tier1.Data
         }
 
         // Todo, implement RestApi
-        public  String ChangeUser(int userId)
+        public  String ChangeUserType(int userId)
         {
             return "smth";
+        }
+        
+        // Todo, implement RestApi
+
+        public bool PageExist(int id)
+        {
+            return true;
         }
     }
 }

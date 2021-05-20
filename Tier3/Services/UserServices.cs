@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Tier1;
+using TierOne;
 using Tier3.DataAccess;
 
 namespace Tier3.Services

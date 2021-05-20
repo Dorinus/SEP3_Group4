@@ -84,14 +84,7 @@ using TierOne.Shared;
 #nullable disable
 #nullable restore
 #line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\AllUsers.razor"
-using Tier1.Data;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 3 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\AllUsers.razor"
-using Tier1;
+using TierOne.Data;
 
 #line default
 #line hidden
@@ -105,13 +98,17 @@ using Tier1;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 66 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\AllUsers.razor"
+#line 74 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\AllUsers.razor"
        
+
+    [Parameter]
+    public int PageNumber { get; set; } =  1;
+
     private IList<User> users;
 
     protected override async Task OnInitializedAsync()
     {
-        users = UserManager.GetUsers(1);
+        users = UserManager.GetUsers(PageNumber);
     }
 
     private async void RemoveUser(int userId)
@@ -125,13 +122,13 @@ using Tier1;
         }
         else
         {
-    //TO DO write an error mesage
+    //TO DO write an error message
         }
     }
 
-    private void ChangeUser(int userId)
+    private void ChangeUserType(int userId)
     {
-        String response =  UserManager.ChangeUser(userId);
+        String response = UserManager.ChangeUserType(userId);
 
         User user = users.First(t => t.Id == userId);
         if (user.Type.Equals("user"))
@@ -142,14 +139,48 @@ using Tier1;
         {
             response = "user";
         }
-            users.First(t => t.Id == userId).Type = response;
-       
+        users.First(t => t.Id == userId).Type = response;
+    }
+
+
+    // go back
+    private void backPage()
+    {
+        // makes sure page doesnt go lower then 1
+        if (PageNumber > 1)
+        {
+            bool PageExist = UserManager.PageExist(PageNumber);
+            if (PageExist)
+            {
+                PageNumber--;
+                users = UserManager.GetUsers(PageNumber);
+                
+                // should change url
+                jsRuntime.InvokeVoidAsync("ChangeUrl", PageNumber.ToString());
+            }
+        }
+    }
+
+    // go next page
+    private void nextPage()
+    {
+        // checks for existance of page
+        bool PageExist = UserManager.PageExist(PageNumber);
+        
+        // if it exist loads next page
+        if (PageExist)
+        {
+            PageNumber++;
+            users = UserManager.GetUsers(PageNumber);
+        } 
+        
     }
 
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime jsRuntime { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserManager UserManager { get; set; }
     }
 }

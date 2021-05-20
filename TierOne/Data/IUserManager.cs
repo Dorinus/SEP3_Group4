@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Tier1.Data
+namespace TierOne.Data
 {
     public interface IUserManager
     {
@@ -18,6 +18,7 @@ namespace Tier1.Data
 
         //remove a user
         bool RemoveUser(int userId);
-        String ChangeUser(int userId);
+        String ChangeUserType(int userId);
+        bool PageExist(int id);
     }
 }

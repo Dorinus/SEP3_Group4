@@ -1,10 +1,11 @@
 @page "/AllUsers"
-@using Tier1.Data
-@using Tier1
+@using TierOne.Data
 @inject IUserManager UserManager
+@inject IJSRuntime jsRuntime
 
 
-<h3>All Users</h3>
+<h3>All Users. Page: @PageNumber</h3>
+
 
 @if (users == null)
 {
@@ -15,7 +16,7 @@
 else if (!users.Any())
 {
     <p>
-        <em>No ToDo items exist. Please add some.</em>
+        <em>No Users exist in the system. Or something went wrong</em>
     </p>
 }
 else
@@ -44,7 +45,7 @@ else
 
                 <AuthorizeView Policy="OnlyAdmin">
                     <td>
-                        <button @onclick="@(() => ChangeUser(item.Id))">
+                        <button @onclick="@(() => ChangeUserType(item.Id))">
                             <i class="oi oi-person" style="color:blue"/>
                         </button>
                     </td>
@@ -59,16 +60,27 @@ else
         }
         </tbody>
     </table>
+
+    <button @onclick="@(() => backPage())">
+        <i class="oi oi-chevron-left" style="color:blue"/>
+    </button>
+    <button @onclick="@(() => nextPage())">
+        <i class="oi oi-chevron-right" style="color:blue"/>
+    </button>
 }
 
 
 
 @code {
+
+    [Parameter]
+    public int PageNumber { get; set; } =  1;
+
     private IList<User> users;
 
     protected override async Task OnInitializedAsync()
     {
-        users = UserManager.GetUsers(1);
+        users = UserManager.GetUsers(PageNumber);
     }
 
     private async void RemoveUser(int userId)
@@ -82,13 +94,13 @@ else
         }
         else
         {
-    //TO DO write an error mesage
+    //TO DO write an error message
         }
     }
 
-    private void ChangeUser(int userId)
+    private void ChangeUserType(int userId)
     {
-        String response =  UserManager.ChangeUser(userId);
+        String response = UserManager.ChangeUserType(userId);
 
         User user = users.First(t => t.Id == userId);
         if (user.Type.Equals("user"))
@@ -99,8 +111,41 @@ else
         {
             response = "user";
         }
-            users.First(t => t.Id == userId).Type = response;
-       
+        users.First(t => t.Id == userId).Type = response;
+    }
+
+
+    // go back
+    private void backPage()
+    {
+        // makes sure page doesnt go lower then 1
+        if (PageNumber > 1)
+        {
+            bool PageExist = UserManager.PageExist(PageNumber);
+            if (PageExist)
+            {
+                PageNumber--;
+                users = UserManager.GetUsers(PageNumber);
+                
+                // should change url
+                jsRuntime.InvokeVoidAsync("ChangeUrl", PageNumber.ToString());
+            }
+        }
+    }
+
+    // go next page
+    private void nextPage()
+    {
+        // checks for existance of page
+        bool PageExist = UserManager.PageExist(PageNumber);
+        
+        // if it exist loads next page
+        if (PageExist)
+        {
+            PageNumber++;
+            users = UserManager.GetUsers(PageNumber);
+        } 
+        
     }
 
 }

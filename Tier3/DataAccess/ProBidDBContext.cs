@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Tier1;
+using TierOne;
 
 namespace Tier3.DataAccess
 {
