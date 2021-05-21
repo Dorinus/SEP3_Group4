@@ -83,21 +83,14 @@ using TierOne.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Register.razor"
 using TierOne.Data;
 
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 3 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
-using TierOne.Data.Migrations;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/NewProduct")]
-    public partial class CreateProduct : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Register")]
+    public partial class Register : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -105,49 +98,36 @@ using TierOne.Data.Migrations;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 43 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+#line 27 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Register.razor"
        
-    private Product NewProduct = new Product();
-    private DateTime Date = DateTime.Now;
-    private DateTime Hour = DateTime.Now;
-    private IList<Category> CategoriesList;
-    private IList<Category> SelectedCategoriesList = new List<Category>();
-    private String Tags;
+    private User NewUserToRegister = new User();
 
-
-    protected override async Task OnInitializedAsync()
+    private async Task AddNewUser()
     {
-        CategoriesList = await CategoryManager.GetCategories();
+        NewUserToRegister.Type = "user";
 
-        Category category = new Category();
-        category.CategoryName = "dwd";
-        CategoriesList.Add(category);
-    }
+    // Requesting tier 2 to register a user and getting the response
+        bool response=  await UserManager.RegisterNewUser(NewUserToRegister);
 
-
-    private async void CreateNewProduct()
-    {
-    }
-
-
-    private void SelectedCategories(ChangeEventArgs changeEventArgs, Category item)
-    {
-        if (SelectedCategoriesList.Contains(item))
+        if (response)
         {
-            SelectedCategoriesList.Remove(item);
+            Console.WriteLine("it worked!!!!");
+            NavigationManager.NavigateTo("/Index");
         }
         else
         {
-            SelectedCategoriesList.Add(item);
+            Console.WriteLine("smth went wrong");
+            // TODO write r message label
         }
+        
     }
 
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ICategoryManager CategoryManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IProductManager ProductManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserManager UserManager { get; set; }
     }
 }
 #pragma warning restore 1591

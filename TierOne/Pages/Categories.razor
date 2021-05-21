@@ -1,6 +1,90 @@
 @page "/Categories"
+@using TierOne.Data.Migrations
+@inject ICategoryManager CategoryManager
+
+
 <h3>Categories</h3>
 
+<div class="form-group">
+    <label>Add category: </label>
+    <input type="text" placeholder="Category name" @bind-value="Category.CategoryName"/>
+    <button @onclick="@(() => AddCategory())">
+        <i class="oi oi-cloud-upload" style="color:violet"/>
+    </button>
+</div>
+
+@if (CategoriesList == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else if (!CategoriesList.Any())
+{
+    <p>
+        <em>No Categories exist in the system. Or something went wrong</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Delete</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in  CategoriesList)
+        {
+            <tr>
+                <td>@item.CategoryName</td>
+
+
+                <td>
+                    <button @onclick="@(() => RemoveUser(item))">
+                        <i class="oi oi-trash" style="color:red"/>
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+
+
 @code {
-    
+    private IList<Category> CategoriesList;
+    private Category Category = new Category();
+
+    protected override async Task OnInitializedAsync()
+    {
+        CategoriesList = await CategoryManager.GetCategories();
+    }
+
+    private async void RemoveUser(Category Category)
+    {
+        bool response = await CategoryManager.DeleteCategory(Category.CategoryName);
+        if (response)
+        {
+            CategoriesList.Remove(Category);
+        }
+    }
+
+    private async void AddCategory()
+    {
+        bool tempBool = new bool();
+        if (!String.IsNullOrEmpty(Category.CategoryName))
+        {
+            bool response = await CategoryManager.CreateCategory(Category.CategoryName);
+            if (response)
+            {
+                CategoriesList.Add(Category);
+            }
+        }
+    }
+
 }

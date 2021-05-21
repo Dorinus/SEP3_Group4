@@ -107,3 +107,5 @@ D:\SEP3Proj\SEP3_Group4\TierOne\obj\Debug\net5.0\RazorDeclaration\Pages\ViewBids
 D:\SEP3Proj\SEP3_Group4\TierOne\obj\Debug\net5.0\Razor\Pages\ViewBids.razor.g.cs
 D:\SEP3Proj\SEP3_Group4\TierOne\obj\Debug\net5.0\RazorDeclaration\Pages\CreateProduct.razor.g.cs
 D:\SEP3Proj\SEP3_Group4\TierOne\obj\Debug\net5.0\Razor\Pages\CreateProduct.razor.g.cs
+D:\SEP3Proj\SEP3_Group4\TierOne\obj\Debug\net5.0\RazorDeclaration\Pages\Categories.razor.g.cs
+D:\SEP3Proj\SEP3_Group4\TierOne\obj\Debug\net5.0\Razor\Pages\Categories.razor.g.cs

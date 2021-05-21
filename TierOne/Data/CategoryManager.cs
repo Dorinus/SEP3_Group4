@@ -23,53 +23,69 @@ namespace TierOne.Data
         
         public async Task<bool> CreateCategory(string category)
         {
-            String categoryAsJson = JsonSerializer.Serialize(category);
-            StringContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await Client.PostAsync(Uri,  content);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                Console.WriteLine("New Category Created");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-                return false;
-            }
+
+            return true;
+            // String categoryAsJson = JsonSerializer.Serialize(category);
+            // StringContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
+            // HttpResponseMessage responseMessage = await Client.PostAsync(Uri,  content);
+            // if (responseMessage.IsSuccessStatusCode)
+            // {
+            //     Console.WriteLine("New Category Created");
+            //     return true;
+            // }
+            // else
+            // {
+            //     Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            //     return false;
+            // }
         }
 
         public async Task<bool> DeleteCategory(string category)
         {
-            String categoryAsJson = JsonSerializer.Serialize(category);
-            StringContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await Client.DeleteAsync( Uri + "/" + category);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                Console.WriteLine("Category deleted");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-                return false;
-            }
+
+            return true;
+
+            // String categoryAsJson = JsonSerializer.Serialize(category);
+            // StringContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
+            // HttpResponseMessage responseMessage = await Client.DeleteAsync( Uri + "/" + category);
+            // if (responseMessage.IsSuccessStatusCode)
+            // {
+            //     Console.WriteLine("Category deleted");
+            //     return true;
+            // }
+            // else
+            // {
+            //     Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            //     return false;
+            // }
         }
 
         public async Task<IList<Category> > GetCategories()
         {
-            HttpResponseMessage responseMessage = await Client.GetAsync(Uri);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                string result = await responseMessage.Content.ReadAsStringAsync();
-                IList<Category> categories = JsonSerializer.Deserialize<IList<Category>>(result,
-                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-                return categories;
-            }
-            else
-            {
-                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-                return null;
-            }
+
+            Category category = new Category();
+            category.CategoryName = "Gold";
+            
+            Category category1 = new Category();
+            category1.CategoryName = "Silver";
+
+            IList<Category> categories = new List<Category>();
+            categories.Add(category);
+            categories.Add(category1);
+            return categories;
+            // HttpResponseMessage responseMessage = await Client.GetAsync(Uri);
+            // if (responseMessage.IsSuccessStatusCode)
+            // {
+            //     string result = await responseMessage.Content.ReadAsStringAsync();
+            //     IList<Category> categories = JsonSerializer.Deserialize<IList<Category>>(result,
+            //         new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+            //     return categories;
+            // }
+            // else
+            // {
+            //     Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            //     return null;
+            // }
         }
     }
 }

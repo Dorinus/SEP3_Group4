@@ -42,10 +42,18 @@
         <AuthorizeView Policy="manager">
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="NewProduct">
-                    <span class="oi oi-box" aria-hidden="true"></span> New Product - Adm Man
+                    <span class="oi oi-box" aria-hidden="true"></span> New Product - AdmMan
                 </NavLink>
             </li>
         </AuthorizeView>
+        
+        <AuthorizeView Policy="manager">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="Categories">
+                    <span class="oi oi-box" aria-hidden="true"></span> Categories - Man
+                </NavLink>
+            </li>
+            </AuthorizeView>
 
         <AuthorizeView Policy="user">
             <li class="nav-item px-3">
@@ -54,6 +62,8 @@
                 </NavLink>
             </li>
         </AuthorizeView>
+        
+        
 
 
         <AuthorizeView Policy="user"> </AuthorizeView>

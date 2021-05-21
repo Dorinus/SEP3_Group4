@@ -83,21 +83,14 @@ using TierOne.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
-using TierOne.Data;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 3 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Categories.razor"
 using TierOne.Data.Migrations;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/NewProduct")]
-    public partial class CreateProduct : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Categories")]
+    public partial class Categories : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -105,40 +98,35 @@ using TierOne.Data.Migrations;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 43 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+#line 59 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Categories.razor"
        
-    private Product NewProduct = new Product();
-    private DateTime Date = DateTime.Now;
-    private DateTime Hour = DateTime.Now;
     private IList<Category> CategoriesList;
-    private IList<Category> SelectedCategoriesList = new List<Category>();
-    private String Tags;
-
+    private Category Category = new Category();
 
     protected override async Task OnInitializedAsync()
     {
         CategoriesList = await CategoryManager.GetCategories();
-
-        Category category = new Category();
-        category.CategoryName = "dwd";
-        CategoriesList.Add(category);
     }
 
-
-    private async void CreateNewProduct()
+    private async void RemoveUser(Category Category)
     {
-    }
-
-
-    private void SelectedCategories(ChangeEventArgs changeEventArgs, Category item)
-    {
-        if (SelectedCategoriesList.Contains(item))
+        bool response = await CategoryManager.DeleteCategory(Category.CategoryName);
+        if (response)
         {
-            SelectedCategoriesList.Remove(item);
+            CategoriesList.Remove(Category);
         }
-        else
+    }
+
+    private async void AddCategory()
+    {
+        bool tempBool = new bool();
+        if (!String.IsNullOrEmpty(Category.CategoryName))
         {
-            SelectedCategoriesList.Add(item);
+            bool response = await CategoryManager.CreateCategory(Category.CategoryName);
+            if (response)
+            {
+                CategoriesList.Add(Category);
+            }
         }
     }
 
@@ -147,7 +135,6 @@ using TierOne.Data.Migrations;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ICategoryManager CategoryManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IProductManager ProductManager { get; set; }
     }
 }
 #pragma warning restore 1591

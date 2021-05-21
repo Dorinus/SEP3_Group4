@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace TierOne.Pages
+namespace TierOne.Shared
 {
     #line hidden
     using System;
@@ -82,22 +82,7 @@ using TierOne.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
-using TierOne.Data;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 3 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
-using TierOne.Data.Migrations;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/NewProduct")]
-    public partial class CreateProduct : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -105,49 +90,21 @@ using TierOne.Data.Migrations;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 43 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+#line 77 "D:\SEP3Proj\SEP3_Group4\TierOne\Shared\NavMenu.razor"
        
-    private Product NewProduct = new Product();
-    private DateTime Date = DateTime.Now;
-    private DateTime Hour = DateTime.Now;
-    private IList<Category> CategoriesList;
-    private IList<Category> SelectedCategoriesList = new List<Category>();
-    private String Tags;
+    private bool collapseNavMenu = true;
 
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    protected override async Task OnInitializedAsync()
+    private void ToggleNavMenu()
     {
-        CategoriesList = await CategoryManager.GetCategories();
-
-        Category category = new Category();
-        category.CategoryName = "dwd";
-        CategoriesList.Add(category);
-    }
-
-
-    private async void CreateNewProduct()
-    {
-    }
-
-
-    private void SelectedCategories(ChangeEventArgs changeEventArgs, Category item)
-    {
-        if (SelectedCategoriesList.Contains(item))
-        {
-            SelectedCategoriesList.Remove(item);
-        }
-        else
-        {
-            SelectedCategoriesList.Add(item);
-        }
+        collapseNavMenu = !collapseNavMenu;
     }
 
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ICategoryManager CategoryManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IProductManager ProductManager { get; set; }
     }
 }
 #pragma warning restore 1591

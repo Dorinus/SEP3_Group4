@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace TierOne.Data
@@ -5,6 +6,6 @@ namespace TierOne.Data
     public interface IProductManager
     {
         Task<bool> CreateProduct(Product product);
-        
+
     }
 }

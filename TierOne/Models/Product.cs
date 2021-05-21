@@ -12,7 +12,7 @@ namespace TierOne
         public String Description { get; set; }
         public double Price { get; set; }
         public DateTime Date { get; set; }
-        public String Photo { get; set; }
+        public String PhotoUrl { get; set; }
         public IList<String> Categories { get; set; }
         public IList<String> Tags { get; set; }
 
