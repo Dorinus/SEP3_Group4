@@ -3,6 +3,7 @@
 @using TierOne.Data.Migrations
 @inject IProductManager ProductManager
 @inject ICategoryManager CategoryManager
+@inject NavigationManager NavigationManager
 
 <h3>Create new product</h3>
 <hr/>
@@ -21,6 +22,7 @@
     <div class="form-group"> Image URL:<br/> <InputText @bind-Value="NewProduct.PhotoUrl"/> </div>
 
     <div class="form-group"> Description:<br/> <InputTextArea rows="4" @bind-Value="NewProduct.Description"/> </div>
+    <div class="form-group"> Tags:<br/> <InputTextArea text="Separate by comma" rows="5" @bind-Value="Tags"/> </div>
 
     @foreach (var item in CategoriesList)
     {
@@ -33,10 +35,12 @@
     {
         @cat.CategoryName
     }
+    
+    
 
 
     <p class="actions">
-        <button class="btn btn-outline-dark" type="submit">Create new product</button>
+        <button class="btn btn-outline-dark" @onclick="CreateNewProduct" type="submit">Create new product</button>
     </p>
 </EditForm>
 
@@ -46,7 +50,7 @@
     private DateTime Hour = DateTime.Now;
     private IList<Category> CategoriesList;
     private IList<Category> SelectedCategoriesList = new List<Category>();
-    private String Tags;
+    private String Tags = "";
 
 
     protected override async Task OnInitializedAsync()
@@ -61,9 +65,18 @@
 
     private async void CreateNewProduct()
     {
+        GetTags();
+        
+        bool response = await ProductManager.CreateProduct(NewProduct);
+        if (response)
+        {
+            NavigationManager.NavigateTo("/");
+        }
     }
 
+    
 
+    // Gets selected categoories
     private void SelectedCategories(ChangeEventArgs changeEventArgs, Category item)
     {
         if (SelectedCategoriesList.Contains(item))
@@ -73,6 +86,19 @@
         else
         {
             SelectedCategoriesList.Add(item);
+        }
+    }
+    
+    
+    // Gets and formats tags
+    private void GetTags()
+    {
+        NewProduct.Tags = Tags.Split(',').Select(tag => tag.Trim()).ToList();
+        NewProduct.Tags = NewProduct.Tags.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+        foreach (var tag in NewProduct.Tags)
+        {
+            Console.WriteLine(tag);
         }
     }
 

@@ -82,15 +82,90 @@ using TierOne.Shared;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Security")]
-    public partial class Security : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\AllProducts.razor"
+using TierOne.Data;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/AllProducts")]
+    public partial class AllProducts : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+#nullable restore
+#line 84 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\AllProducts.razor"
+       
+
+    [Parameter]
+    public int PageNumber { get; set; } = 1;
+
+    private IList<Product> products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductManager.GetActiveProducts(PageNumber);
+    }
+
+
+    // go back
+    private async void backPage()
+    {
+    // makes sure page doesnt go lower then 1
+        if (PageNumber > 1)
+        {
+            bool pageExist = await ProductManager.PageExist(PageNumber);
+            if (pageExist)
+            {
+                PageNumber--;
+                products = await ProductManager.GetActiveProducts(PageNumber);
+            }
+        }
+    }
+
+    // go next page
+    private async void nextPage()
+    {
+    // checks for existance of page
+        bool pageExist = await ProductManager.PageExist(PageNumber);
+
+    // if it exist loads next page
+        if (pageExist)
+        {
+            PageNumber++;
+            products = await ProductManager.GetActiveProducts(PageNumber);
+        }
+    }
+
+    private void ChangeProduct(int itemId)
+    {
+    }
+
+    private async void RemoveProduct(Product product)
+    {
+       bool response = await ProductManager.RemoveProduct(product.Id);
+
+        if (response)
+        {
+            products.Remove(product);
+        }
+    }
+
+    private void ShowProduct(int itemId)
+    {
+         NavigationManager.NavigateTo($"bid/{itemId}");
+    }
+
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IProductManager ProductManager { get; set; }
     }
 }
 #pragma warning restore 1591

@@ -6,7 +6,7 @@ namespace TierOne
 {
     public class Product
     {
-        public String Id { get; set; }
+        public int Id { get; set; }
         [Required, MaxLength(128)]
         public String Name { get; set; }
         public String Description { get; set; }

@@ -90,7 +90,7 @@ using TierOne.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 77 "D:\SEP3Proj\SEP3_Group4\TierOne\Shared\NavMenu.razor"
+#line 83 "D:\SEP3Proj\SEP3_Group4\TierOne\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

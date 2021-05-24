@@ -14,11 +14,11 @@ namespace TierOne.Data
         
         
         // get a set of user to show on AllUser page
-        IList<User> GetUsers(int userSet);
+        IList<User> GetUsers(int pageNumber);
 
         //remove a user
         bool RemoveUser(int userId);
         String ChangeUserType(int userId);
-        bool PageExist(int id);
+        bool PageExist(int pageNumber);
     }
 }

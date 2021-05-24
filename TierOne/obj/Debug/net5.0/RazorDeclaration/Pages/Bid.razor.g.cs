@@ -83,21 +83,14 @@ using TierOne.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Bid.razor"
 using TierOne.Data;
 
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 3 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
-using TierOne.Data.Migrations;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/NewProduct")]
-    public partial class CreateProduct : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Bid/{Id:int}")]
+    public partial class Bid : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -105,71 +98,24 @@ using TierOne.Data.Migrations;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 47 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+#line 43 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Bid.razor"
        
-    private Product NewProduct = new Product();
-    private DateTime Date = DateTime.Now;
-    private DateTime Hour = DateTime.Now;
-    private IList<Category> CategoriesList;
-    private IList<Category> SelectedCategoriesList = new List<Category>();
-    private String Tags = "";
 
+    [Parameter]
+    public int Id { get; set; }
+
+    private Product Product;
 
     protected override async Task OnInitializedAsync()
     {
-        CategoriesList = await CategoryManager.GetCategories();
-
-        Category category = new Category();
-        category.CategoryName = "dwd";
-        CategoriesList.Add(category);
+        Product = await ProductManager.GetProduct(Id);
     }
 
-
-    private async void CreateNewProduct()
-    {
-        GetTags();
-        
-        bool response = await ProductManager.CreateProduct(NewProduct);
-        if (response)
-        {
-            NavigationManager.NavigateTo("/");
-        }
-    }
-
-    
-
-    // Gets selected categoories
-    private void SelectedCategories(ChangeEventArgs changeEventArgs, Category item)
-    {
-        if (SelectedCategoriesList.Contains(item))
-        {
-            SelectedCategoriesList.Remove(item);
-        }
-        else
-        {
-            SelectedCategoriesList.Add(item);
-        }
-    }
-    
-    
-    // Gets and formats tags
-    private void GetTags()
-    {
-        NewProduct.Tags = Tags.Split(',').Select(tag => tag.Trim()).ToList();
-        NewProduct.Tags = NewProduct.Tags.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-
-        foreach (var tag in NewProduct.Tags)
-        {
-            Console.WriteLine(tag);
-        }
-    }
 
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ICategoryManager CategoryManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IProductManager ProductManager { get; set; }
     }
 }

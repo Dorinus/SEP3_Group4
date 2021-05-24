@@ -42,28 +42,34 @@
         <AuthorizeView Policy="manager">
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="NewProduct">
-                    <span class="oi oi-box" aria-hidden="true"></span> New Product - AdmMan
+                    <span class="oi oi-box" aria-hidden="true"></span> New Product
                 </NavLink>
             </li>
         </AuthorizeView>
-        
+
         <AuthorizeView Policy="manager">
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="Categories">
-                    <span class="oi oi-box" aria-hidden="true"></span> Categories - Man
+                    <span class="oi oi-box" aria-hidden="true"></span> Categories
                 </NavLink>
             </li>
-            </AuthorizeView>
+        </AuthorizeView>
+        <AuthorizeView Policy="user">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="AllProducts">
+                    <span class="oi oi-box" aria-hidden="true"></span> Products
+                </NavLink>
+            </li>
+        </AuthorizeView>
+
 
         <AuthorizeView Policy="user">
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="ViewBids">
-                    <span class="oi oi-box" aria-hidden="true"></span> View Bids - Users
+                    <span class="oi oi-box" aria-hidden="true"></span> Bids
                 </NavLink>
             </li>
         </AuthorizeView>
-        
-        
 
 
         <AuthorizeView Policy="user"> </AuthorizeView>

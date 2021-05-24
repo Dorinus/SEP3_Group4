@@ -68,7 +68,7 @@ namespace TierOne.Data
         }
 
         // Todo, implement RestApi
-        public IList<User> GetUsers(int userSet)
+        public IList<User> GetUsers(int pageNumber)
         {
             IList<User> users = new List<User>();
             User user = new User(1,"Simple","qweasd","user",  "Dorin", "Chira", 
@@ -93,7 +93,7 @@ namespace TierOne.Data
         
         // Todo, implement RestApi
 
-        public bool PageExist(int id)
+        public bool PageExist(int pageNumber)
         {
             return true;
         }
