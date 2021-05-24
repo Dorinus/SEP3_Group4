@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace TierOne.Data
 {
     public class UserManager : DataManager, IUserManager
@@ -42,29 +43,43 @@ namespace TierOne.Data
 
         
         // Todo, implement RestApi
-        public User ValidateUser(string userName, string password)
+        public async Task<User> ValidateUser(User user)
         {
             
-            User user = new User();
-            if (userName.Equals("admin") && password.Equals("admin"))
+            HttpResponseMessage responseMessage = await Client.GetAsync(Uri);
+            if (responseMessage.IsSuccessStatusCode)
             {
-
-                user.UserName = "admin";
-                user.Password = "admin";
-                user.Type = "admin";
-            } else if (userName.Equals("manager") && password.Equals("manager"))
-            {
-                user.UserName = "manager";
-                user.Password = "manager";
-                user.Type = "manager";
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                User validateUser = JsonSerializer.Deserialize<User>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return validateUser;
             }
-            else if (userName.Equals("user") && password.Equals("user"))
+            else
             {
-                user.UserName = "user";
-                user.Password = "user";
-                user.Type = "user";
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return null;
             }
-            return user;
+            
+            // User user = new User();
+            // if (userName.Equals("admin") && password.Equals("admin"))
+            // {
+            //
+            //     user.UserName = "admin";
+            //     user.Password = "admin";
+            //     user.Type = "admin";
+            // } else if (userName.Equals("manager") && password.Equals("manager"))
+            // {
+            //     user.UserName = "manager";
+            //     user.Password = "manager";
+            //     user.Type = "manager";
+            // }
+            // else if (userName.Equals("user") && password.Equals("user"))
+            // {
+            //     user.UserName = "user";
+            //     user.Password = "user";
+            //     user.Type = "user";
+            // }
+            // return user;
         }
 
         // Todo, implement RestApi

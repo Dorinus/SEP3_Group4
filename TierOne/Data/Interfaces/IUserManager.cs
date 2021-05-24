@@ -10,7 +10,7 @@ namespace TierOne.Data
         Task<bool> RegisterNewUser(User user);
         
         // validates login
-        User ValidateUser(String userName, String password);
+        Task<User> ValidateUser(User user);
         
         
         // get a set of user to show on AllUser page

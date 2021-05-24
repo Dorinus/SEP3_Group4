@@ -42,15 +42,19 @@ namespace TierOne
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
 
-        public void ValidateLogin(string username, string password)
+        public async void ValidateLogin(string username, string password)
         {
             if (string.IsNullOrEmpty(username)) throw new Exception("Enter username");
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
             ClaimsIdentity identity = new ClaimsIdentity();
             try
             {
+                // Todo check for it
+                User tempUser = new User();
+                tempUser.UserName = username;
+                tempUser.Password = password;
                 // Checks the username
-                User user = userManager.ValidateUser(username, password);
+                User user = await userManager.ValidateUser(tempUser);
                 identity = SetupClaimsForUser(user);
                 string serialisedData = JsonSerializer.Serialize(user);
                 jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);

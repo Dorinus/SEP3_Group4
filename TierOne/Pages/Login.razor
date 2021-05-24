@@ -28,6 +28,10 @@
 
     public async Task PerformLogin()
     {
+        User tempUser = new User();
+        tempUser.UserName = username;
+        tempUser.Password = password;
+        
         errorMessage = "";
         try
         {
