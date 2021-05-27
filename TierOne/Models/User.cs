@@ -1,16 +1,20 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace TierOne
 {
     public class User
     {
+        [JsonPropertyName("id")]
         public int Id { get; set; }
         [Required]
+        [JsonPropertyName("username")]
         public String UserName { get; set; }
         [Required]
+        [JsonPropertyName("password")]
         public String Password { get; set; }
-        
+        [JsonPropertyName("type")]
         public String Type { get; set; }
         
 
@@ -19,20 +23,28 @@ namespace TierOne
         //from personal info class
         
         [Required, MaxLength(128)]
+        [JsonPropertyName("firstName")]
         public String FirstName { get; set; }
         [Required, MaxLength(128)]
+        [JsonPropertyName("lastName")]
         public String LastName { get; set; }
         [Required]
+        [JsonPropertyName("dob")]
         public String Dob { get; set; }
         [Required]
+        [JsonPropertyName("email")]
         public String Email { get; set; }
         [Required]
+        [JsonPropertyName("card")]
         public String Card { get; set; }
         [Required]
+        [JsonPropertyName("cardDate")]
         public String CardDate { get; set; }
         [Required]
+        [JsonPropertyName("address")]
         public String Address { get; set; }
         [Required]
+        [JsonPropertyName("postalIndex")]
         public String PostalIndex { get; set; }
 
         public User()

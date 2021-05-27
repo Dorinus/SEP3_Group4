@@ -18,7 +18,7 @@ namespace TierOne.Data
         public UserManager()
         {
             Client = HttpClient;
-            Uri = "http://localhost:8090/user";
+            Uri = "http://localhost:8090";
         }
         
         
@@ -28,7 +28,7 @@ namespace TierOne.Data
         {
             String userAsJson = JsonSerializer.Serialize(user);
             StringContent content = new StringContent(userAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await Client.PostAsync(Uri,  content);
+            HttpResponseMessage responseMessage = await Client.PostAsync(Uri + "/register",  content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 Console.WriteLine("New User Created");
@@ -45,8 +45,8 @@ namespace TierOne.Data
         // Todo, implement RestApi
         public async Task<User> ValidateUser(User user)
         {
-            
-            HttpResponseMessage responseMessage = await Client.GetAsync(Uri);
+            StringContent content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await Client.PostAsync(Uri + "/login",  content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();

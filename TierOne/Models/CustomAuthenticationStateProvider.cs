@@ -47,8 +47,8 @@ namespace TierOne
             if (string.IsNullOrEmpty(username)) throw new Exception("Enter username");
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
             ClaimsIdentity identity = new ClaimsIdentity();
-            try
-            {
+            // try
+            // {
                 // Todo check for it
                 User tempUser = new User();
                 tempUser.UserName = username;
@@ -59,11 +59,11 @@ namespace TierOne
                 string serialisedData = JsonSerializer.Serialize(user);
                 jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
                 cachedUser = user;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            // }
+            // catch (Exception e)
+            // {
+            //     throw e;
+            // }
 
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
@@ -81,7 +81,7 @@ namespace TierOne
             List<Claim> claims = new List<Claim>();
             
             claims.Add(new Claim(ClaimTypes.Name, user.UserName));
-            claims.Add(new Claim("UserType", user.Type));
+            claims.Add(new Claim("UserType", "user.Type"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
