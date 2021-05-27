@@ -22,28 +22,28 @@ namespace TierOne
 
         //from personal info class
         
-        [Required, MaxLength(128)]
+        //[Required, MaxLength(128)]
         [JsonPropertyName("firstName")]
         public String FirstName { get; set; }
-        [Required, MaxLength(128)]
+        //[Required, MaxLength(128)]
         [JsonPropertyName("lastName")]
         public String LastName { get; set; }
-        [Required]
+        //[Required]
         [JsonPropertyName("dob")]
         public String Dob { get; set; }
-        [Required]
+        //[Required]
         [JsonPropertyName("email")]
         public String Email { get; set; }
-        [Required]
+        //[Required]
         [JsonPropertyName("card")]
         public String Card { get; set; }
-        [Required]
+        //[Required]
         [JsonPropertyName("cardDate")]
         public String CardDate { get; set; }
-        [Required]
+        //[Required]
         [JsonPropertyName("address")]
         public String Address { get; set; }
-        [Required]
+        //[Required]
         [JsonPropertyName("postalIndex")]
         public String PostalIndex { get; set; }
 
