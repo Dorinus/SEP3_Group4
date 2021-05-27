@@ -80,7 +80,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        users = UserManager.GetUsers(PageNumber);
+        users = await UserManager.GetUsers(PageNumber);
     }
 
     private async void RemoveUser(int userId)
@@ -116,7 +116,7 @@ else
 
 
     // go back
-    private void backPage()
+    private async void backPage()
     {
         // makes sure page doesnt go lower then 1
         if (PageNumber > 1)
@@ -125,7 +125,7 @@ else
             if (PageExist)
             {
                 PageNumber--;
-                users = UserManager.GetUsers(PageNumber);
+                users = await UserManager.GetUsers(PageNumber);
                 
                 // should change url
                 jsRuntime.InvokeVoidAsync("ChangeUrl", PageNumber.ToString());
@@ -134,7 +134,7 @@ else
     }
 
     // go next page
-    private void nextPage()
+    private async void nextPage()
     {
         // checks for existance of page
         bool PageExist = UserManager.PageExist(PageNumber);
@@ -143,7 +143,7 @@ else
         if (PageExist)
         {
             PageNumber++;
-            users = UserManager.GetUsers(PageNumber);
+            users = await UserManager.GetUsers(PageNumber);
         } 
         
     }

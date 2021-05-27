@@ -59,39 +59,25 @@ namespace TierOne.Data
                 Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
                 return null;
             }
-            
-            // User user = new User();
-            // if (userName.Equals("admin") && password.Equals("admin"))
-            // {
-            //
-            //     user.UserName = "admin";
-            //     user.Password = "admin";
-            //     user.Type = "admin";
-            // } else if (userName.Equals("manager") && password.Equals("manager"))
-            // {
-            //     user.UserName = "manager";
-            //     user.Password = "manager";
-            //     user.Type = "manager";
-            // }
-            // else if (userName.Equals("user") && password.Equals("user"))
-            // {
-            //     user.UserName = "user";
-            //     user.Password = "user";
-            //     user.Type = "user";
-            // }
-            // return user;
         }
 
-        // Todo, implement RestApi
-        public IList<User> GetUsers(int pageNumber)
+        public async Task<IList<User>> GetUsers(int pageNumber)
         {
-            IList<User> users = new List<User>();
-            User user = new User(1,"Simple","qweasd","user",  "Dorin", "Chira", 
-                "06.08.1850", "dorin@mail.com","2155 5448","06/21",
-                "Alexandru cel Bun 2", "5800");
-            users.Add(user);
+            StringContent content = new StringContent(JsonSerializer.Serialize(pageNumber), Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await Client.GetAsync(Uri + "/users/" + pageNumber );
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                IList<User> users = JsonSerializer.Deserialize<IList<User>>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return users;
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return null;
+            }
             
-            return users;
         }
 
         // Todo, implement RestApi

@@ -14,7 +14,7 @@ namespace TierOne.Data
         
         
         // get a set of user to show on AllUser page
-        IList<User> GetUsers(int pageNumber);
+        Task<IList<User>> GetUsers(int pageNumber);
 
         //remove a user
         bool RemoveUser(int userId);
