@@ -23,20 +23,19 @@ namespace TierOne.Data
 
         public async Task<bool> CreateProduct(Product product)
         {
-            return true;
-            // String productAsJson = JsonSerializer.Serialize(product);
-            // StringContent content = new StringContent(productAsJson, Encoding.UTF8, "application/json");
-            // HttpResponseMessage responseMessage = await Client.PostAsync(Uri,  content);
-            // if (responseMessage.IsSuccessStatusCode)
-            // {
-            //     Console.WriteLine("New Product Created");
-            //     return true;
-            // }
-            // else
-            // {
-            //     Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-            //     return false;
-            // }
+            String productAsJson = JsonSerializer.Serialize(product);
+            StringContent content = new StringContent(productAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await Client.PostAsync(Uri,  content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                Console.WriteLine("New Product Created");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return false;
+            }
         }
 
         public async Task<IList<Product>> GetActiveProducts(int pageNumber)
