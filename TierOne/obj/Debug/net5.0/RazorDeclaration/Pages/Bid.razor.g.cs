@@ -103,11 +103,12 @@ using TierOne.Data;
 
     [Parameter]
     public int Id { get; set; }
-
-    private Product Product;
+    
+    private Product Product = new Product();
 
     protected override async Task OnInitializedAsync()
     {
+        Console.WriteLine("Retrieving product with id " + Id);
         Product = await ProductManager.GetProduct(Id);
     }
 

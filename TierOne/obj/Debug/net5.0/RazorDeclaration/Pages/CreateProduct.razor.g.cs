@@ -96,6 +96,13 @@ using TierOne.Data.Migrations;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/NewProduct")]
     public partial class CreateProduct : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,7 +112,7 @@ using TierOne.Data.Migrations;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 64 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
+#line 65 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\Pages\CreateProduct.razor"
        
     private Product NewProduct = new Product();
     private DateTime Date = DateTime.Now;
@@ -125,11 +132,11 @@ using TierOne.Data.Migrations;
     private async void CreateNewProduct()
     {
         GetTags();
-        
+        Console.WriteLine(JsonSerializer.Serialize(NewProduct));
         int response = await ProductManager.CreateProduct(NewProduct);
         if (response>-1)
         {
-            Console.WriteLine(response);
+            Console.WriteLine("Created product id " + response);
             NavigationManager.NavigateTo("/Bid/" + response);
         }
         else

@@ -86,18 +86,17 @@ namespace TierOne.Data
 
         public async Task<Product> GetProduct(int id)
         {
-            // Product product = new Product();
-            // product.Id = id;
-            // product.Categories = new List<string>() {"Gold", "silver"};
-            // product.Description = "The description";
-            // product.Price = 500;
-            // product.Date = DateTime.Now;
-            // product.Name = "Test " + id;
-            // product.Tags = new List<string>() {"Brand", "New"};
-            // product.PhotoUrl = "https://i.imgur.com/R7Kxmuq.jpeg";
-            //
-            // return product;
-            return null;
+            Product product = new Product();
+            product.Id = id;
+            product.Categories = new List<Category>() {};
+            product.Description = "The description";
+            product.Price = 500;
+            product.Date = DateTime.Now;
+            product.Name = "Test " + id;
+            product.Tags = new List<Tag>() {};
+            product.PhotoUrl = "https://i.imgur.com/R7Kxmuq.jpeg";
+            
+            return product;
         }
     }
 }

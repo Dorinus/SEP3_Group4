@@ -1,6 +1,7 @@
 @page "/NewProduct"
 @using TierOne.Data
 @using TierOne.Data.Migrations
+@using System.Text.Json
 @inject IProductManager ProductManager
 @inject ICategoryManager CategoryManager
 @inject NavigationManager NavigationManager
@@ -29,7 +30,7 @@ else
         <div class="form-group"> Name:<br/> <InputText @bind-Value="NewProduct.Name"/> </div>
 
 
-        <div class="form-group"> End Date:<br/> <InputDate rows="4" @bind-Value="Date"/> </div>
+        <div class="form-group"> End Date:<br/> <InputDate rows="4" @bind-Value="NewProduct.Date"/> </div>
 
         <div class="form-group"> End Time:<br/> <input type="time" @bind="Hour" @bind:format="HH:mm"/></div>
 
@@ -56,7 +57,7 @@ else
 
 
         <p class="actions">
-            <button class="btn btn-outline-dark" @onclick="CreateNewProduct" type="submit">Create new product</button>
+            <button class="btn btn-outline-dark" type="submit">Create new product</button>
         </p>
     </EditForm>
 }
@@ -80,11 +81,11 @@ else
     private async void CreateNewProduct()
     {
         GetTags();
-        
+        Console.WriteLine(JsonSerializer.Serialize(NewProduct));
         int response = await ProductManager.CreateProduct(NewProduct);
         if (response>-1)
         {
-            Console.WriteLine(response);
+            Console.WriteLine("Created product id " + response);
             NavigationManager.NavigateTo("/Bid/" + response);
         }
         else
