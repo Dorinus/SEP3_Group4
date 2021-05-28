@@ -81,10 +81,14 @@ else
     {
         GetTags();
         
-        bool response = await ProductManager.CreateProduct(NewProduct);
-        if (response)
+        int response = await ProductManager.CreateProduct(NewProduct);
+        if (response<0)
         {
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/Bid/" + response);
+        }
+        else
+        {
+            Console.WriteLine("Creation of product was wrong");
         }
     }
 

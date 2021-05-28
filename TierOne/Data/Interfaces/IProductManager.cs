@@ -6,7 +6,7 @@ namespace TierOne.Data
 {
     public interface IProductManager
     {
-        Task<bool> CreateProduct(Product product);
+        Task<int> CreateProduct(Product product);
         Task<IList<Product>> GetActiveProducts(int pageNumber);
 
         Task<bool>  PageExist(int pageNumber);

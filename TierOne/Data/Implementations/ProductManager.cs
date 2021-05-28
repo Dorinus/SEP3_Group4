@@ -21,20 +21,25 @@ namespace TierOne.Data
         }
 
 
-        public async Task<bool> CreateProduct(Product product)
+        public async Task<int> CreateProduct(Product product)
         {
             String productAsJson = JsonSerializer.Serialize(product);
             StringContent content = new StringContent(productAsJson, Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await Client.PostAsync(Uri,  content);
             if (responseMessage.IsSuccessStatusCode)
             {
+                
                 Console.WriteLine("New Product Created");
-                return true;
+                
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                int productId = JsonSerializer.Deserialize<int>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return productId;
             }
             else
             {
                 Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-                return false;
+                return -1;
             }
         }
 
