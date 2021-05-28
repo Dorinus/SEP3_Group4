@@ -126,10 +126,16 @@ using TierOne.Data.Migrations;
     {
         GetTags();
         
-        bool response = await ProductManager.CreateProduct(NewProduct);
-        if (response)
+        int response = await ProductManager.CreateProduct(NewProduct);
+        if (response>-1)
         {
-            NavigationManager.NavigateTo("/");
+            Console.WriteLine(response);
+            NavigationManager.NavigateTo("/Bid/" + response);
+        }
+        else
+        {
+            Console.WriteLine(response);
+            Console.WriteLine("Creation of product was wrong");
         }
     }
 
@@ -152,13 +158,20 @@ using TierOne.Data.Migrations;
     // Gets and formats tags
     private void GetTags()
     {
-        NewProduct.Tags = Tags.Split(',').Select(tag => tag.Trim()).ToList();
-        NewProduct.Tags = NewProduct.Tags.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
-        foreach (var tag in NewProduct.Tags)
-        {
-            Console.WriteLine(tag);
-        }
+        // IList<String> tempTags = Tags.Split(',').Select(tag => tag.Trim()).ToList();
+        // tempTags = tempTags.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+        //
+        // foreach (var tag in tempTags)
+        // {
+        //     NewProduct.Tags.Add(new Tag(tag));
+        // }
+        //
+        //
+        // foreach (var tag in NewProduct.Tags)
+        // {
+        //     Console.WriteLine(tag.TagName);
+        // }
     }
 
 
