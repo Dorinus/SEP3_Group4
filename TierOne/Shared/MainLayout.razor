@@ -8,9 +8,12 @@
 
     <div class="main">
         <div class="top-row px-4 auth">
-            <Login/> 
+            
             <!-- These component is from template -->
             <!--  LoginDisplay/ -->
+            <AuthorizeView Policy="user">
+            <Login/>
+            </AuthorizeView>
             
             
             

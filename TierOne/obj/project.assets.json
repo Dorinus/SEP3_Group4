@@ -1454,19 +1454,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Professional\\.nuget\\packages\\": {}
+    "C:\\Users\\tolde\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Professional\\RiderProjects\\SEP3_Group4\\TierOne\\TierOne.csproj",
+      "projectUniqueName": "C:\\Users\\tolde\\RiderProjects\\DNPAssignments\\SEP3_Group4\\TierOne\\TierOne.csproj",
       "projectName": "TierOne",
-      "projectPath": "C:\\Users\\Professional\\RiderProjects\\SEP3_Group4\\TierOne\\TierOne.csproj",
-      "packagesPath": "C:\\Users\\Professional\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Professional\\RiderProjects\\SEP3_Group4\\TierOne\\obj\\",
+      "projectPath": "C:\\Users\\tolde\\RiderProjects\\DNPAssignments\\SEP3_Group4\\TierOne\\TierOne.csproj",
+      "packagesPath": "C:\\Users\\tolde\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tolde\\RiderProjects\\DNPAssignments\\SEP3_Group4\\TierOne\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Professional\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\tolde\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -1529,7 +1529,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\Professional\\.dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

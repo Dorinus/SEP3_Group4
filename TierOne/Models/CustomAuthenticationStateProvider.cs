@@ -81,7 +81,7 @@ namespace TierOne
             List<Claim> claims = new List<Claim>();
             
             claims.Add(new Claim(ClaimTypes.Name, user.UserName));
-            claims.Add(new Claim("UserType", "user.Type"));
+            claims.Add(new Claim("UserType", user.Type));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }

@@ -8,41 +8,58 @@
 <h3>Create new product</h3>
 <hr/>
 
-<EditForm Model="@NewProduct" OnValidSubmit="@CreateNewProduct">
-    <DataAnnotationsValidator/> <ValidationSummary/>
-    <div class="form-group"> Name:<br/> <InputText @bind-Value="NewProduct.Name"/> </div>
 
-
-    <div class="form-group"> End Date:<br/> <InputDate rows="4" @bind-Value="Date"/> </div>
-
-    <div class="form-group"> End Time:<br/> <input type="time" @bind="Hour" @bind:format="HH:mm"/></div>
-
-    <div class="form-group"> Price:<br/> <InputNumber rows="4" @bind-Value="NewProduct.Price"/> </div>
-
-    <div class="form-group"> Image URL:<br/> <InputText @bind-Value="NewProduct.PhotoUrl"/> </div>
-
-    <div class="form-group"> Description:<br/> <InputTextArea rows="4" @bind-Value="NewProduct.Description"/> </div>
-    <div class="form-group"> Tags:<br/> <InputTextArea text="Separate by comma" rows="5" @bind-Value="Tags"/> </div>
-
-    @foreach (var item in CategoriesList)
-    {
-        <input type="checkbox" @onchange="@((arg) => SelectedCategories(arg, item))"/>
-        @item.CategoryName
-        <br/>
-    }
-
-    @foreach (var cat in SelectedCategoriesList)
-    {
-        @cat.CategoryName
-    }
-    
-    
-
-
-    <p class="actions">
-        <button class="btn btn-outline-dark" @onclick="CreateNewProduct" type="submit">Create new product</button>
+@if (CategoriesList == null)
+{
+    <p>
+        <em>Loading...</em>
     </p>
-</EditForm>
+}
+else if (!CategoriesList.Any())
+{
+    <p>
+        <em>No Users exist in the system. Or something went wrong</em>
+    </p>
+}
+else
+{
+
+    <EditForm Model="@NewProduct" OnValidSubmit="@CreateNewProduct">
+        <DataAnnotationsValidator/> <ValidationSummary/>
+        <div class="form-group"> Name:<br/> <InputText @bind-Value="NewProduct.Name"/> </div>
+
+
+        <div class="form-group"> End Date:<br/> <InputDate rows="4" @bind-Value="Date"/> </div>
+
+        <div class="form-group"> End Time:<br/> <input type="time" @bind="Hour" @bind:format="HH:mm"/></div>
+
+        <div class="form-group"> Price:<br/> <InputNumber rows="4" @bind-Value="NewProduct.Price"/> </div>
+
+        <div class="form-group"> Image URL:<br/> <InputText @bind-Value="NewProduct.PhotoUrl"/> </div>
+
+        <div class="form-group"> Description:<br/> <InputTextArea rows="4" @bind-Value="NewProduct.Description"/> </div>
+        <div class="form-group"> Tags:<br/> <InputTextArea text="Separate by comma" rows="5" @bind-Value="Tags"/> </div>
+
+        @foreach (var item in CategoriesList)
+        {
+            <input type="checkbox" @onchange="@((arg) => SelectedCategories(arg, item))"/>
+            @item.CategoryName
+            <br/>
+        }
+
+        @foreach (var cat in SelectedCategoriesList)
+        {
+            @cat.CategoryName
+        }
+
+
+
+
+        <p class="actions">
+            <button class="btn btn-outline-dark" @onclick="CreateNewProduct" type="submit">Create new product</button>
+        </p>
+    </EditForm>
+}
 
 @code {
     private Product NewProduct = new Product();
@@ -56,10 +73,7 @@
     protected override async Task OnInitializedAsync()
     {
         CategoriesList = await CategoryManager.GetCategories();
-
-        Category category = new Category();
-        category.CategoryName = "dwd";
-        CategoriesList.Add(category);
+        
     }
 
 

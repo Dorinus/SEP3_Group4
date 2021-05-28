@@ -5,13 +5,15 @@
 
 <h3>Categories</h3>
 
-<div class="form-group">
-    <label>Add category: </label>
-    <input type="text" placeholder="Category name" @bind-value="Category.CategoryName"/>
-    <button @onclick="@(() => AddCategory())">
-        <i class="oi oi-cloud-upload" style="color:violet"/>
-    </button>
-</div>
+
+
+    <div class="form-group">
+        <label>Add category: </label>
+        <input type="text" placeholder="Category name" @bind-value="Category.CategoryName"/>
+        <button @onclick="@(() => AddCategory())">
+            <i class="oi oi-cloud-upload" style="color:violet"/>
+        </button>
+    </div>
 
 @if (CategoriesList == null)
 {
@@ -22,7 +24,7 @@
 else if (!CategoriesList.Any())
 {
     <p>
-        <em>No Categories exist in the system. Or something went wrong</em>
+        <em>Something went wrong</em>
     </p>
 }
 else
@@ -52,6 +54,7 @@ else
         </tbody>
     </table>
 }
+
 
 
 
