@@ -107,12 +107,19 @@ else
     // Gets and formats tags
     private void GetTags()
     {
-        NewProduct.Tags = Tags.Split(',').Select(tag => tag.Trim()).ToList();
-        NewProduct.Tags = NewProduct.Tags.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
+        IList<String> tempTags = Tags.Split(',').Select(tag => tag.Trim()).ToList();
+        tempTags = tempTags.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+        foreach (var tag in tempTags)
+        {
+            NewProduct.Tags.Add(new Tag(tag));
+        }
+
+       
         foreach (var tag in NewProduct.Tags)
         {
-            Console.WriteLine(tag);
+            Console.WriteLine(tag.TagName);
         }
     }
 
