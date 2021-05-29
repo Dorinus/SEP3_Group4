@@ -83,14 +83,21 @@ using TierOne.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Register.razor"
+#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\EditProduct.razor"
 using TierOne.Data;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Register")]
-    public partial class Register : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 3 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\EditProduct.razor"
+using TierOne.Data.Migrations;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/EditProduct/{Id:int}")]
+    public partial class EditProduct : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -98,28 +105,44 @@ using TierOne.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 27 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Register.razor"
+#line 66 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\EditProduct.razor"
        
-    private User NewUserToRegister = new User();
+   
+    [Parameter]
+    public int Id { get; set; }
+    private Product OldProduct = new Product();
+    private Product EditedProduct = new Product();
+    private DateTime Date = DateTime.Now;
+    private DateTime Hour = DateTime.Now;
+    private IList<Category> CategoriesList;
+    private IList<Category> SelectedCategoriesList = new List<Category>();
+    private String Tags = "";
 
-    private async Task AddNewUser()
+    protected override async Task OnInitializedAsync()
     {
-        NewUserToRegister.Type = "user";
+        Console.WriteLine("Retrieving product with id " + Id);
+        OldProduct = await ProductManager.GetProduct(Id);
+    }
 
-    // Requesting tier 2 to register a user and getting the response
-        bool response=  await UserManager.RegisterNewUser(NewUserToRegister);
-
+    public async void EditTheProduct()
+    {
+        bool response = await ProductManager.EditProduct(EditedProduct);
         if (response)
         {
-            Console.WriteLine("it worked!!!!");
-            NavigationManager.NavigateTo("/Index");
+            NavigationManager.NavigateTo("/Bid/" + EditedProduct.Id);
+        }
+    }
+
+    private  void SelectedCategories(ChangeEventArgs changeEventArgs, Category item)
+    {
+        if (SelectedCategoriesList.Contains(item))
+        {
+             SelectedCategoriesList.Remove(item);
         }
         else
         {
-            Console.WriteLine("smth went wrong");
-            // TODO write r message label
+            SelectedCategoriesList.Add(item);
         }
-        
     }
 
 
@@ -127,7 +150,8 @@ using TierOne.Data;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserManager UserManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ICategoryManager CategoryManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IProductManager ProductManager { get; set; }
     }
 }
 #pragma warning restore 1591

@@ -13,5 +13,6 @@ namespace TierOne.Data
         Task<bool> RemoveProduct(int productId);
 
         Task<Product> GetProduct(int id);
+        Task<bool> EditProduct(Product editedProduct);
     }
 }

@@ -33,7 +33,7 @@ else
             <th>Show Product</th>
 
             <AuthorizeView Policy="manager">
-                <th>Change Type</th>
+                <th>Edit Product</th>
                 <th>Delete</th>
             </AuthorizeView>
 
@@ -57,7 +57,7 @@ else
 
                 <AuthorizeView Policy="manager">
                     <td>
-                        <button @onclick="@(() => ChangeProduct(item.Id))">
+                        <button @onclick="@(() => EditProduct(item.Id))">
                             <i class="oi oi-person" style="color:blue"/>
                         </button>
                     </td>
@@ -73,10 +73,10 @@ else
         </tbody>
     </table>
 
-    <button @onclick="@(() => backPage())">
+    <button @onclick="@(() => BackPage())">
         <i class="oi oi-chevron-left" style="color:blue"/>
     </button>
-    <button @onclick="@(() => nextPage())">
+    <button @onclick="@(() => NextPage())">
         <i class="oi oi-chevron-right" style="color:blue"/>
     </button>
 }
@@ -95,7 +95,7 @@ else
 
 
     // go back
-    private async void backPage()
+    private async void BackPage()
     {
     // makes sure page doesnt go lower then 1
         if (PageNumber > 1)
@@ -110,7 +110,7 @@ else
     }
 
     // go next page
-    private async void nextPage()
+    private async void NextPage()
     {
     // checks for existance of page
         bool pageExist = await ProductManager.PageExist(PageNumber);
@@ -123,8 +123,10 @@ else
         }
     }
 
-    private void ChangeProduct(int itemId)
+    private void EditProduct(int itemId)
     {
+        NavigationManager.NavigateTo($"EditProduct/{itemId}");
+        
     }
 
     private async void RemoveProduct(Product product)

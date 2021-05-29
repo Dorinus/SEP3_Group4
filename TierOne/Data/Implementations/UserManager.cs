@@ -52,6 +52,10 @@ namespace TierOne.Data
                 string result = await responseMessage.Content.ReadAsStringAsync();
                 User validateUser = JsonSerializer.Deserialize<User>(result,
                     new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                if (user == null)
+                {
+                    Console.WriteLine("User is null");
+                }
                 return validateUser;
             }
             else

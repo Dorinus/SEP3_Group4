@@ -1,0 +1,105 @@
+@page "/EditProduct/{Id:int}"
+@using TierOne.Data
+@using TierOne.Data.Migrations
+@inject IProductManager ProductManager
+@inject ICategoryManager CategoryManager
+@inject NavigationManager NavigationManager
+
+
+<h3>EditProduct</h3>
+
+
+
+@if (CategoriesList == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else if (!CategoriesList.Any())
+{
+    <p>
+        <em>No Users exist in the system. Or something went wrong</em>
+    </p>
+}
+else
+{
+
+    <EditForm Model="@EditedProduct" OnValidSubmit="@EditTheProduct">
+        <DataAnnotationsValidator/> <ValidationSummary/>
+        <div class="form-group"> Name:<br/> <InputText text="@OldProduct.Name" @bind-Value="EditedProduct.Name"/> </div>
+
+
+        <div class="form-group"> End Date:<br/> <InputDate date="@OldProduct.Date.Date" rows="4" @bind-Value="EditedProduct.Date"/> </div>
+
+        <div class="form-group"> End Time:<br/> <input type="time"  @bind="Hour" @bind:format="HH:mm"/></div>
+
+        <div class="form-group"> Price:<br/> <InputNumber rows="4" @bind-Value="EditedProduct.Price"/> </div>
+
+        <div class="form-group"> Image URL:<br/> <InputText @bind-Value="EditedProduct.PhotoUrl"/> </div>
+
+        <div class="form-group"> Description:<br/> <InputTextArea rows="4" @bind-Value="EditedProduct.Description"/> </div>
+        <div class="form-group"> Tags:<br/> <InputTextArea text="Separate by comma" rows="5" @bind-Value="Tags"/> </div>
+
+        @foreach (var item in CategoriesList)
+        {
+            <input type="checkbox" @onchange="@((arg) => SelectedCategories(arg, item))"/>
+            @item.CategoryName
+            <br/>
+        }
+
+        @foreach (var cat in SelectedCategoriesList)
+        {
+            @cat.CategoryName
+        }
+        
+
+
+
+
+        <p class="actions">
+            <button class="btn btn-outline-dark" type="submit">Create new product</button>
+        </p>
+    </EditForm>
+}
+
+@code {
+   
+    [Parameter]
+    public int Id { get; set; }
+    private Product OldProduct = new Product();
+    private Product EditedProduct = new Product();
+    private DateTime Date = DateTime.Now;
+    private DateTime Hour = DateTime.Now;
+    private IList<Category> CategoriesList;
+    private IList<Category> SelectedCategoriesList = new List<Category>();
+    private String Tags = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("Retrieving product with id " + Id);
+        OldProduct = await ProductManager.GetProduct(Id);
+    }
+
+    public async void EditTheProduct()
+    {
+        bool response = await ProductManager.EditProduct(EditedProduct);
+        if (response)
+        {
+            NavigationManager.NavigateTo("/Bid/" + EditedProduct.Id);
+        }
+    }
+
+    private  void SelectedCategories(ChangeEventArgs changeEventArgs, Category item)
+    {
+        if (SelectedCategoriesList.Contains(item))
+        {
+             SelectedCategoriesList.Remove(item);
+        }
+        else
+        {
+            SelectedCategoriesList.Add(item);
+        }
+    }
+
+}

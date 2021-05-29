@@ -17,7 +17,7 @@ namespace TierOne.Data
         public ProductManager()
         {
             Client = HttpClient;
-            Uri = "http://localhost:8090/product";
+            Uri = "http://localhost:8090";
         }
 
 
@@ -25,7 +25,7 @@ namespace TierOne.Data
         {
             String productAsJson = JsonSerializer.Serialize(product);
             StringContent content = new StringContent(productAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await Client.PostAsync(Uri,  content);
+            HttpResponseMessage responseMessage = await Client.PostAsync(Uri + "/product",  content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 
@@ -45,33 +45,75 @@ namespace TierOne.Data
 
         public async Task<IList<Product>> GetActiveProducts(int pageNumber)
         {
-            Product product = new Product();
-            product.Id = 1;
-            product.Price = 100;
-            product.Name = "Test Product";
-            product.Date = new DateTime(2022, 8, 6, 10, 12, 00);
-            Product product1 = new Product();
-            product1.Id = 5;
-            product1.Price = 991;
-            product1.Name = "Product Example";
-            product1.Date = new DateTime(2023, 8, 6, 10, 12, 00);
-            IList<Product> products = new List<Product>();
-            products.Add(product);
-            products.Add(product1);
-            return products;
-            // HttpResponseMessage responseMessage = await Client.GetAsync(Uri + "/page/" + pageNumber );
-            // if (responseMessage.IsSuccessStatusCode)
-            // {
-            //     string result = await responseMessage.Content.ReadAsStringAsync();
-            //     IList<Product> products = JsonSerializer.Deserialize<IList<Product>>(result,
-            //         new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-            //     return products;
-            // }
-            // else
-            // {
-            //     Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-            //     return null;
-            // }
+            
+            HttpResponseMessage responseMessage = await Client.GetAsync(Uri + "/activeProducts/" + pageNumber );
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                IList<Product> products = JsonSerializer.Deserialize<IList<Product>>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return products;
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return null;
+            }
+        }
+        
+        public async Task<Product> GetProduct(int id)
+        {
+            HttpResponseMessage responseMessage = await Client.GetAsync(Uri + "/product/" + id );
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                Product product = JsonSerializer.Deserialize<Product>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return product;
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return null;
+            }
+        }
+        
+        public async Task<bool> RemoveProduct(int productId)
+        {
+            HttpResponseMessage responseMessage = await Client.DeleteAsync(Uri + "/product" + productId );
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                bool response = JsonSerializer.Deserialize<bool>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return response;
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return false;
+            }
+        }
+        
+        public async Task<bool> EditProduct(Product editedProduct)
+        {
+            String productAsJson = JsonSerializer.Serialize(editedProduct);
+            StringContent content = new StringContent(productAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await Client.PostAsync(Uri + "/product",  content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                
+                Console.WriteLine("Product is edited");
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                bool serverResponse = JsonSerializer.Deserialize<bool>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return serverResponse;
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return false;
+            }
         }
 
         public async Task<bool> PageExist(int pageNumber)
@@ -79,24 +121,6 @@ namespace TierOne.Data
             return true;
         }
 
-        public async Task<bool> RemoveProduct(int productId)
-        {
-            return true;
-        }
 
-        public async Task<Product> GetProduct(int id)
-        {
-            Product product = new Product();
-            product.Id = id;
-            product.Categories = new List<Category>() {};
-            product.Description = "The description";
-            product.Price = 500;
-            product.Date = DateTime.Now;
-            product.Name = "Test " + id;
-            product.Tags = new List<Tag>() {};
-            product.PhotoUrl = "https://i.imgur.com/R7Kxmuq.jpeg";
-            
-            return product;
-        }
     }
 }
