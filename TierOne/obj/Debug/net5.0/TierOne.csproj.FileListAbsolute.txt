@@ -224,3 +224,5 @@ C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\obj\Debug\net5.0
 C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\obj\Debug\net5.0\RazorDeclaration\Pages\Bid.razor.g.cs
 C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\obj\Debug\net5.0\Razor\Pages\AllProducts.razor.g.cs
 C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\obj\Debug\net5.0\Razor\Pages\Bid.razor.g.cs
+C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\obj\Debug\net5.0\RazorDeclaration\Pages\EditProduct.razor.g.cs
+C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\obj\Debug\net5.0\Razor\Pages\EditProduct.razor.g.cs
