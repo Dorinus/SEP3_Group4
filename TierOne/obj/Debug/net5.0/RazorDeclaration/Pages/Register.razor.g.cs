@@ -13,77 +13,77 @@ namespace TierOne.Pages
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 1 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 3 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 4 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 5 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 6 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 7 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 8 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 9 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using TierOne;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\_Imports.razor"
+#line 10 "D:\SEP3Proj\SEP3_Group4\TierOne\_Imports.razor"
 using TierOne.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\Pages\Register.razor"
+#line 2 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Register.razor"
 using TierOne.Data;
 
 #line default
@@ -98,7 +98,7 @@ using TierOne.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 27 "C:\Users\tolde\RiderProjects\DNPAssignments\SEP3_Group4\TierOne\Pages\Register.razor"
+#line 27 "D:\SEP3Proj\SEP3_Group4\TierOne\Pages\Register.razor"
        
     private User NewUserToRegister = new User();
 
