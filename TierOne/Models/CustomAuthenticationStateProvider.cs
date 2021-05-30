@@ -85,5 +85,10 @@ namespace TierOne
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
+
+        public int GetUserId()
+        {
+            return cachedUser.Id;
+        }
     }
 }

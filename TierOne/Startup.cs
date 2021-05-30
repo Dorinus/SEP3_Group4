@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using TierOne;
 using TierOne.Areas.Identity;
 using TierOne.Data;
+using TierOne.Data.Interfaces;
 using TierOne.Data.Migrations;
 
 namespace TierOne
@@ -48,6 +49,7 @@ namespace TierOne
             services.AddSingleton<IUserManager, UserManager>();
             services.AddSingleton<IProductManager, ProductManager>();
             services.AddSingleton<ICategoryManager, CategoryManager>();
+            services.AddSingleton<IBidManager, BidManager>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             
             

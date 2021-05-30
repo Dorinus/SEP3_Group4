@@ -1,6 +1,8 @@
 @page "/Bid/{Id:int}"
 @using TierOne.Data
+@using TierOne.Data.Interfaces
 @inject IProductManager ProductManager
+@inject IBidManager BidManager
 
 
 <h3>@Product.Name</h3>
@@ -17,7 +19,7 @@ else
     <div class="form-group"> Name:<br/> @Product.Name </div>
     <div class="form-group"> Date:<br/> @Product.Date </div>
     <div class="form-group"> Description:<br/> @Product.Description </div>
-    <div class="form-group"> Name:<br/> @Product.Price </div>
+    
 
                                                        
     <div class="form-group"> Categories:
@@ -35,8 +37,18 @@ else
         }
     </div>
     
-
+    
     <img src="@Product.PhotoUrl" asp-append-version="true" width="300px"/>
+                                                  
+    <!-- Maybe later to implement, thou security reasons--> 
+    <!--  <div class="form-group"> Name: <br/> @UserWinning </div>  -->                                                               
+    <div class="form-group"> Price: <br/> @Product.Price </div>
+    <div class="form-group"> New Bid: <br/> <InputNumber rows="4" @bind-Value="Price"/> </div>
+    <button @onclick="@(() => BidButtonCliked())">
+        <i class="oi oi-trash" style="color:red"/>
+    </button>
+    
+
 }
 
 
@@ -44,13 +56,39 @@ else
 
     [Parameter]
     public int Id { get; set; }
-    
+    public int Price { get; set; }
+    public String UserWinning { get; set; }
+
     private Product Product = new Product();
 
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine("Retrieving product with id " + Id);
         Product = await ProductManager.GetProduct(Id);
+        
+        // for later
+        // UserWinning = await BidManager.GetBidWinner(Id);
+        // if (UserWinning == null)
+        // {
+        //     UserWinning = "None";
+        // }
+        
+    }
+
+    
+    // Sends new price for the product, if the repsonse is true, the bid was accepted
+    public async void BidButtonCliked()
+    {
+        if (Price != null || Price < Product.Price)
+        {
+            var response = await BidManager.Bid(Product.Id, Price);
+            if (response)
+            {
+                //The price is not assigned to the product as the time may change
+                Product = await ProductManager.GetProduct(Id);
+            }
+            
+        }
     }
 
 
