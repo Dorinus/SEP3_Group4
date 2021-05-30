@@ -6,8 +6,8 @@ namespace TierOne.Data.Migrations
 {
     public interface ICategoryManager
     {
-        Task<bool> CreateCategory(String category);
-        Task<bool> DeleteCategory(String category);
+        Task<bool> CreateCategory(Category category);
+        Task<bool> DeleteCategory(Category category);
         Task<IList<Category>> GetCategories();
         
     }

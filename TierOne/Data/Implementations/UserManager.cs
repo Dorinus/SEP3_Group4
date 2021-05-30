@@ -85,20 +85,20 @@ namespace TierOne.Data
         }
 
         // Todo, implement RestApi
-        public bool RemoveUser(int userId)
+        public async Task<bool> RemoveUser(int userId)
         {
             return true;
         }
 
         // Todo, implement RestApi
-        public  String ChangeUserType(int userId)
+        public async  Task<String> ChangeUserType(int userId)
         {
-            return "smth";
+            return null;
         }
         
         // Todo, implement RestApi
 
-        public bool PageExist(int pageNumber)
+        public async Task<bool> PageExist(int pageNumber)
         {
             return true;
         }

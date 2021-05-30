@@ -99,7 +99,7 @@ namespace TierOne.Data
         {
             String productAsJson = JsonSerializer.Serialize(editedProduct);
             StringContent content = new StringContent(productAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await Client.PostAsync(Uri + "/product",  content);
+            HttpResponseMessage responseMessage = await Client.PutAsync(Uri + "/product",  content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 

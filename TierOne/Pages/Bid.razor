@@ -40,8 +40,7 @@ else
     
     <img src="@Product.PhotoUrl" asp-append-version="true" width="300px"/>
                                                   
-    <!-- Maybe later to implement, thou security reasons--> 
-    <!--  <div class="form-group"> Name: <br/> @UserWinning </div>  -->                                                               
+     <div class="form-group"> Name: <br/> @UserWinning </div>                                                            
     <div class="form-group"> Price: <br/> @Product.Price </div>
     <div class="form-group"> New Bid: <br/> <InputNumber rows="4" @bind-Value="Price"/> </div>
     <button @onclick="@(() => BidButtonCliked())">
@@ -66,12 +65,12 @@ else
         Console.WriteLine("Retrieving product with id " + Id);
         Product = await ProductManager.GetProduct(Id);
         
-        // for later
-        // UserWinning = await BidManager.GetBidWinner(Id);
-        // if (UserWinning == null)
-        // {
-        //     UserWinning = "None";
-        // }
+        
+        UserWinning = await BidManager.GetBidWinner(Id);
+        if (UserWinning == null)
+        {
+            UserWinning = "None";
+        }
         
     }
 

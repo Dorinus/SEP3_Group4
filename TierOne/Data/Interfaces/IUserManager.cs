@@ -17,8 +17,8 @@ namespace TierOne.Data
         Task<IList<User>> GetUsers(int pageNumber);
 
         //remove a user
-        bool RemoveUser(int userId);
-        String ChangeUserType(int userId);
-        bool PageExist(int pageNumber);
+        Task<bool> RemoveUser(int userId);
+        Task<String> ChangeUserType(int userId);
+        Task<bool> PageExist(int pageNumber);
     }
 }

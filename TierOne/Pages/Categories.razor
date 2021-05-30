@@ -70,7 +70,7 @@ else
 
     private async void RemoveUser(Category Category)
     {
-        bool response = await CategoryManager.DeleteCategory(Category.CategoryName);
+        bool response = await CategoryManager.DeleteCategory(Category);
         if (response)
         {
             CategoriesList.Remove(Category);
@@ -82,7 +82,7 @@ else
         bool tempBool = new bool();
         if (!String.IsNullOrEmpty(Category.CategoryName))
         {
-            bool response = await CategoryManager.CreateCategory(Category.CategoryName);
+            bool response = await CategoryManager.CreateCategory(Category);
             if (response)
             {
                 CategoriesList.Add(Category);
