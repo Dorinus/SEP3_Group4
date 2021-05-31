@@ -24,6 +24,7 @@ namespace TierOne.Data
         public async Task<bool> CreateCategory(Category category)
         {
             String categoryAsJson = JsonSerializer.Serialize(category);
+            Console.WriteLine("Creating category " + categoryAsJson);
             StringContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await Client.PostAsync(Uri,  content);
             if (responseMessage.IsSuccessStatusCode)

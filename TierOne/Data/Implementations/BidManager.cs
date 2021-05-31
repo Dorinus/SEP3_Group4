@@ -19,11 +19,11 @@ namespace TierOne.Data
             Client = HttpClient;
             Uri = "http://localhost:8090/bid";
         }
-        public async Task<bool> Bid(int productId, int newPrice)
+        public async Task<bool> Bid(int productId, int userId, int newPrice)
         {
             String productAsJson = JsonSerializer.Serialize(newPrice);
             StringContent content = new StringContent(productAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await Client.PostAsync(Uri  + "/" + productId,  content);
+            HttpResponseMessage responseMessage = await Client.PostAsync(Uri  + "/" + productId + "/" + userId,  content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 

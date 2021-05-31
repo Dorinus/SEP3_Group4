@@ -3,9 +3,7 @@
 @using TierOne.Data.Interfaces
 @inject IProductManager ProductManager
 @inject IBidManager BidManager
-
-
-<h3>@Product.Name</h3>
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 @if (Product == null)
 {
@@ -22,7 +20,7 @@ else
     
 
                                                        
-    <div class="form-group"> Categories:
+  /*  <div class="form-group"> Categories:
         @foreach (var category in Product.Categories)
         {
             @category <text>, </text>
@@ -38,18 +36,17 @@ else
     </div>
     
     
-    <img src="@Product.PhotoUrl" asp-append-version="true" width="300px"/>
+    <img src="@Product.PhotoUrl" asp-append-version="true" width="300px"/> 
                                                   
-     <div class="form-group"> Name: <br/> @UserWinning </div>                                                            
+     <div class="form-group"> Name: <br/> @UserWinning </div>              */                                              
     <div class="form-group"> Price: <br/> @Product.Price </div>
-    <div class="form-group"> New Bid: <br/> <InputNumber rows="4" @bind-Value="Price"/> </div>
-    <button @onclick="@(() => BidButtonCliked())">
+    <div class="form-group"> New Bid: <br/> </div>
+    <button @onclick="@(BidButtonCliked)">
         <i class="oi oi-trash" style="color:red"/>
     </button>
     
 
 }
-
 
 @code {
 
@@ -62,15 +59,16 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        Price = 0;
         Console.WriteLine("Retrieving product with id " + Id);
         Product = await ProductManager.GetProduct(Id);
         
         
-        UserWinning = await BidManager.GetBidWinner(Id);
-        if (UserWinning == null)
-        {
-            UserWinning = "None";
-        }
+        // UserWinning = await BidManager.GetBidWinner(Id);
+        // if (UserWinning == null)
+        // {
+        //     UserWinning = "None";
+        // }
         
     }
 
@@ -78,9 +76,10 @@ else
     // Sends new price for the product, if the repsonse is true, the bid was accepted
     public async void BidButtonCliked()
     {
-        if (Price != null || Price < Product.Price)
+        if (Price > Product.Price)
         {
-            var response = await BidManager.Bid(Product.Id, Price);
+            int userId = ((CustomAuthenticationStateProvider) AuthenticationStateProvider).GetUserId();
+            var response = await BidManager.Bid(Product.Id, userId, Price);
             if (response)
             {
                 //The price is not assigned to the product as the time may change
@@ -89,6 +88,4 @@ else
             
         }
     }
-
-
 }

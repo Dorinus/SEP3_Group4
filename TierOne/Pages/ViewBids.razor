@@ -3,7 +3,7 @@
 @using TierOne.Data.Interfaces
 @inject IProductManager ProductManager
 @inject IBidManager BidManager
-@inject CustomAuthenticationStateProvider CustomAuthenticationStateProvider
+@inject AuthenticationStateProvider CustomAuthenticationStateProvider
 @inject NavigationManager NavigationManager
 
 
@@ -79,7 +79,7 @@ else
     protected override async Task OnInitializedAsync()
     {
 
-        var userId = CustomAuthenticationStateProvider.GetUserId();
+        var userId = ((CustomAuthenticationStateProvider)CustomAuthenticationStateProvider).GetUserId();
         products = await BidManager.GetUserBids(userId);
     }
 

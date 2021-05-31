@@ -5,7 +5,7 @@ namespace TierOne.Data.Interfaces
 {
     public interface IBidManager
     {
-        Task<bool> Bid(int productId, int newPrice);
+        Task<bool> Bid(int productId, int userId, int newPrice);
         Task<string> GetBidWinner(int productId);
         Task<IList<Product>> GetUserBids(int userId);
     }

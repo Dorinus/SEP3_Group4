@@ -24,7 +24,7 @@
 else if (!CategoriesList.Any())
 {
     <p>
-        <em>Something went wrong</em>
+        <em>There are no categories currently</em>
     </p>
 }
 else
@@ -45,7 +45,7 @@ else
 
 
                 <td>
-                    <button @onclick="@(() => RemoveUser(item))">
+                    <button @onclick="@(() => RemoveCategory(item))">
                         <i class="oi oi-trash" style="color:red"/>
                     </button>
                 </td>
@@ -68,7 +68,7 @@ else
         CategoriesList = await CategoryManager.GetCategories();
     }
 
-    private async void RemoveUser(Category Category)
+    private async void RemoveCategory(Category Category)
     {
         bool response = await CategoryManager.DeleteCategory(Category);
         if (response)
