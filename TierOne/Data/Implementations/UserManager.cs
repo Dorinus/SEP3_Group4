@@ -68,7 +68,7 @@ namespace TierOne.Data
         public async Task<IList<User>> GetUsers(int pageNumber)
         {
             StringContent content = new StringContent(JsonSerializer.Serialize(pageNumber), Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await Client.GetAsync(Uri + "/users/" + pageNumber );
+            HttpResponseMessage responseMessage = await Client.GetAsync(Uri + "/user/" + pageNumber );
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();
@@ -87,13 +87,41 @@ namespace TierOne.Data
         // Todo, implement RestApi
         public async Task<bool> RemoveUser(int userId)
         {
-            return true;
+            HttpResponseMessage responseMessage = await Client.DeleteAsync(Uri + "/user" + userId );
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                bool response = JsonSerializer.Deserialize<bool>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return response;
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return false;
+            }
         }
 
         // Todo, implement RestApi
         public async  Task<String> ChangeUserType(int userId)
         {
-            return null;
+            String productAsJson = JsonSerializer.Serialize(userId);
+            StringContent content = new StringContent(productAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await Client.PutAsync(Uri + "/user/type",  content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                
+                Console.WriteLine("User is edited");
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                String serverResponse = JsonSerializer.Deserialize<String>(result,
+                    new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return serverResponse;
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                return null;
+            }
         }
         
         // Todo, implement RestApi

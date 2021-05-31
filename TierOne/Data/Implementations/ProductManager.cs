@@ -80,7 +80,7 @@ namespace TierOne.Data
         
         public async Task<bool> RemoveProduct(int productId)
         {
-            HttpResponseMessage responseMessage = await Client.DeleteAsync(Uri + "/product" + productId );
+            HttpResponseMessage responseMessage = await Client.DeleteAsync(Uri + "/product/" + productId );
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();
