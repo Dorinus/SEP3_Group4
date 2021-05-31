@@ -68,7 +68,7 @@ namespace TierOne.Data
         public async Task<IList<User>> GetUsers(int pageNumber)
         {
             StringContent content = new StringContent(JsonSerializer.Serialize(pageNumber), Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await Client.GetAsync(Uri + "/user/" + pageNumber );
+            HttpResponseMessage responseMessage = await Client.GetAsync(Uri + "/users/" + pageNumber );
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();
@@ -87,7 +87,7 @@ namespace TierOne.Data
         // Todo, implement RestApi
         public async Task<bool> RemoveUser(int userId)
         {
-            HttpResponseMessage responseMessage = await Client.DeleteAsync(Uri + "/user" + userId );
+            HttpResponseMessage responseMessage = await Client.DeleteAsync(Uri + "/users/" + userId );
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();
