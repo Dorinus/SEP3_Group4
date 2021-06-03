@@ -99,10 +99,6 @@ using TierOne.Shared;
 
     public async Task PerformLogin()
     {
-        // User tempUser = new User();
-        // tempUser.UserName = username;
-        // tempUser.Password = password;
-        //
         errorMessage = "";
         try
         {
@@ -113,7 +109,6 @@ using TierOne.Shared;
                 password = "";
                 NavigationManager.NavigateTo("/");
             }
-            
         }
         catch (Exception e)
         {
