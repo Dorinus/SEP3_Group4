@@ -4,17 +4,17 @@
 @inject NavigationManager NavigationManager
 <AuthorizeView>
     <NotAuthorized >
-        <div class="form-group" >
+        <div class="form-group">
             <label>User name: </label> <input type="text" placeholder="user name" @bind-value="username"/>
         </div>
         <div class="form-group">
             <label>Password: </label> <input type="password" placeholder="password" @bind-value="password"/>
         </div>
         <div style="color:red">@errorMessage</div> <a href="" @onclick="PerformLogin"> Login </a>
-        
+
         <a href="/Register" target="_blank">Register</a>
     </NotAuthorized>
-    
+
     <Authorized>
         <br>
         <a href="" @onclick="PerformLogout"> Log out </a>
@@ -28,18 +28,16 @@
 
     public async Task PerformLogin()
     {
-        // User tempUser = new User();
-        // tempUser.UserName = username;
-        // tempUser.Password = password;
-        //
         errorMessage = "";
         try
         {
-            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
-            username = "";
-            password = "";
-            NavigationManager.NavigateTo("/");
-            
+            if (!String.IsNullOrWhiteSpace(username) || !String.IsNullOrWhiteSpace(password))
+            {
+                ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
+                username = "";
+                password = "";
+                NavigationManager.NavigateTo("/");
+            }
         }
         catch (Exception e)
         {

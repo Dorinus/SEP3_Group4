@@ -36,9 +36,11 @@ else
     </div>
     
     
-    <img src="@Product.PhotoUrl" asp-append-version="true" width="300px"/> 
+    
                                                   
-     <div class="form-group"> Name: <br/> @UserWinning </div>              */                                              
+                 */               
+    <img src="@Product.PhotoUrl" asp-append-version="true" width="300px"/> 
+    <div class="form-group"> Name: <br/> @UserWinning </div>  
     <div class="form-group"> Price: <br/> @Product.Price </div>
     <div class="form-group"> New Bid: <br/> </div>
     <button @onclick="@(BidButtonCliked)">
